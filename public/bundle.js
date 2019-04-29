@@ -104,7 +104,18 @@ eval("/* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of l
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"Hello from JavaScript\");\r\n\r\nconst mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\r\n\r\nmapboxgl.accessToken =\r\n  \"pk.eyJ1Ijoic2FtLXBlYWNoIiwiYSI6ImNqdjJpcDRoYjI1c3A0M28wb2c3NW1iM2oifQ.qWTngVsoj6YlKdTri-Ygyg\";\r\n\r\nconst map = new mapboxgl.Map({\r\n  container: \"map\",\r\n  center: [-74.009, 40.705], // FullStack NY coordinates; alternatively, use [-87.6354, 41.8885] for Chicago\r\n  zoom: 12, // starting zoom\r\n  style: \"mapbox://styles/mapbox/streets-v10\" // mapbox has lots of different map styles available.\r\n});\r\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("console.log(\"Hello from JavaScript\");\r\n\r\nconst mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\r\nconst { marker } = __webpack_require__(/*! ./marker */ \"./src/marker.js\");\r\n\r\nmapboxgl.accessToken =\r\n  \"pk.eyJ1Ijoic2FtLXBlYWNoIiwiYSI6ImNqdjJpcDRoYjI1c3A0M28wb2c3NW1iM2oifQ.qWTngVsoj6YlKdTri-Ygyg\";\r\n\r\nconst map = new mapboxgl.Map({\r\n  container: \"map\",\r\n  center: [-74.009, 40.705], // FullStack NY coordinates; alternatively, use [-87.6354, 41.8885] for Chicago\r\n  zoom: 12, // starting zoom\r\n  style: \"mapbox://styles/mapbox/streets-v10\" // mapbox has lots of different map styles available.\r\n});\r\n\r\nmarker(\"activity\", [-74.009, 40.705], map);\r\nmarker(\"restaurant\", [-74.008, 40.705], map);\r\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/marker.js":
+/*!***********************!*\
+  !*** ./src/marker.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\r\n\r\nconst markerIcons = {\r\n  activity: \"http://i.imgur.com/WbMOfMl.png\",\r\n  hotel: \"http://i.imgur.com/D9574Cu.png\",\r\n  restaurant: \"http://i.imgur.com/cqR6pUI.png\"\r\n};\r\n\r\nconst marker = (iconKey, longLat, contId) => {\r\n  const markerDomEl = document.createElement(\"div\"); // Create a new, detached DIV\r\n  markerDomEl.style.width = \"32px\";\r\n  markerDomEl.style.height = \"39px\";\r\n  markerDomEl.style.backgroundImage = `url(${markerIcons[iconKey]})`;\r\n\r\n  return new mapboxgl.Marker(markerDomEl).setLngLat(longLat).addTo(contId); // [-87.641, 41.895] for Chicago\r\n};\r\n\r\nmodule.exports = { marker };\r\n\n\n//# sourceURL=webpack:///./src/marker.js?");
 
 /***/ })
 

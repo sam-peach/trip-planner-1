@@ -1,6 +1,7 @@
 console.log("Hello from JavaScript");
 
 const mapboxgl = require("mapbox-gl");
+const { marker } = require("./marker");
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic2FtLXBlYWNoIiwiYSI6ImNqdjJpcDRoYjI1c3A0M28wb2c3NW1iM2oifQ.qWTngVsoj6YlKdTri-Ygyg";
@@ -11,3 +12,6 @@ const map = new mapboxgl.Map({
   zoom: 12, // starting zoom
   style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
 });
+
+marker("activity", [-74.009, 40.705], map);
+marker("restaurant", [-74.008, 40.705], map);
